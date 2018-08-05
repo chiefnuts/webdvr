@@ -1,0 +1,17 @@
+version: '2'
+services:
+  Ombi:
+    scale: 1
+    start_on_create: true
+  Lidarr:
+    scale: 1
+    start_on_create: true
+  NZBGet:
+    scale: 1
+    start_on_create: true
+  Sonarr:
+    scale: 1
+    start_on_create: true
+  Radarr:
+    scale: 1
+    start_on_create: true

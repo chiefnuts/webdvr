@@ -1,0 +1,79 @@
+version: '2'
+services:
+  Ombi:
+    image: linuxserver/ombi
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: America/Denver
+    stdin_open: true
+    volumes:
+    - /data/apps/plexpals-ombi:/config
+    tty: true
+    ports:
+    - 3579:3579/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  Lidarr:
+    image: linuxserver/lidarr
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+    stdin_open: true
+    volumes:
+    - /data/apps/lidarr:/config
+    - /data/media/music/_lidarr:/music
+    - /data/downloads:/downloads
+    tty: true
+    ports:
+    - 8686:8686/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  NZBGet:
+    image: linuxserver/nzbget
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+    stdin_open: true
+    volumes:
+    - /data/apps/nzbget/config:/config
+    - /data/downloads:/downloads
+    tty: true
+    ports:
+    - 6789:6789/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  Sonarr:
+    image: linuxserver/sonarr
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+    stdin_open: true
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /data/apps/sonarr/config:/config
+    - /data/media/tv:/tv
+    - /data/downloads:/downloads
+    tty: true
+    ports:
+    - 8989:8989/tcp
+    labels:
+      io.rancher.container.pull_image: always
+  Radarr:
+    image: linuxserver/radarr
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      TZ: America/Denver
+    stdin_open: true
+    volumes:
+    - /data/apps/radarr:/config
+    - /dev/rtc:/dev/rtc:ro
+    - /data/downloads:/downloads
+    - /data/media/movies:/movies
+    - /etc/localtime:/etc/localtime:ro
+    tty: true
+    ports:
+    - 7878:7878/tcp
+    labels:
+      io.rancher.container.pull_image: always
